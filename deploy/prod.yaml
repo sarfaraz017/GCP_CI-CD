@@ -7,4 +7,4 @@ metadata:
 description: prod
 requireApproval: true
 gke:
-  cluster: projects/my-gcp-project/locations/us-central1-c/clusters/cluster-2
+  cluster: projects/gcp-sar-project/locations/us-central1-c/clusters/cluster-2
