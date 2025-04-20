@@ -6,9 +6,4 @@ metadata:
   labels: {}
 description: dev
 gke:
-<<<<<<< HEAD
-  cluster: projects/my-gcp-project/locations/us-central1-c/clusters/cluster-1
-
-=======
-  cluster: projects/my-gcp-project/locations/us-central1-c/clusters/cluster-1
->>>>>>> 51e1dba (Updated files with GCP-project-name)
+  cluster: projects/my-gcp-project/locations/us-central1/clusters/dev-cluster
