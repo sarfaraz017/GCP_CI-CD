@@ -32,7 +32,6 @@ We are going to implement the solution using the following steps to implement th
 2. Set up a GitHub repository and push the application code.
 3. Create two GKE clusters: dev-cluster and prod-cluster, using Google Kubernetes Engine.
 4. Create Kubernetes manifest files in the Kubernetes folder to deploy the application and expose it as a service.
-5. Create skaffold.yaml file now.
-6. Now Create cloudbuild.yaml file to build and push docker images to Artifact registry for both application and Configure a Cloud Build trigger to initiate the pipeline upon code push events in the GitHub repository.
-7. Implement the necessary code to define the Cloud Deploy pipeline and targets for both dev-cluster and prod-cluster.
-8. Push the updated code to the GitHub repository, triggering the Cloud Build and Cloud Deploy processes.
+5. Now Create cloudbuild.yaml file to build and push docker images to Artifact registry for both application and Configure a Cloud Build trigger to initiate the pipeline upon code push events in the GitHub repository.
+6. Implement the necessary code to define the Cloud Deploy pipeline and targets for both dev-cluster and prod-cluster.
+7. Push the updated code to the GitHub repository, triggering the Cloud Build and Cloud Deploy processes.
