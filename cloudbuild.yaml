@@ -1,43 +1,4 @@
 steps:
-<<<<<<< HEAD
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/my-gcp-project/gke-repo/quickstart-image', './app1' ]
-  id: 'Build Docker Image'
-
-  # images:
-  # - 'us-central1-docker.pkg.dev/my-gcp-project/gke-repo/quickstart-image'
-
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/my-gcp-project/gke-repo/quickstart-image' ]
-  id: 'Push Docker Image'
-
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/my-gcp-project/gke-repo/flask-image', './app2' ]
-  id: 'Build Docker Image2'
-
-  # images:
-  # - 'us-central1-docker.pkg.dev/my-gcp-project/gke-repo/quickstart-image'
-
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/my-gcp-project/gke-repo/flask-image' ]
-  id: 'Push Docker Image2'
-
-
-- name: 'google/cloud-sdk:latest'
-  entrypoint: 'sh'
-  args:
-  - -xe
-  - -c
-  - |
-    gcloud deploy apply --file deploy/pipeline.yaml --region=us-central1
-    gcloud deploy apply --file deploy/dev.yaml --region=us-central1
-    gcloud deploy apply --file deploy/prod.yaml --region=us-central1
-
-    gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=gke-cicd-pipeline --region=us-central1 --from-k8s-manifest=./kubernetes/app1.yaml
-    gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=gke-cicd-pipeline --region=us-central1 --from-k8s-manifest=./kubernetes/app2.yaml
-
-  # gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=gke-cicd-pipeline --region=us-central1 --skaffold-file=skaffold.yaml
-=======
   # Build app1 Docker image
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Build Docker Image - app1'
@@ -74,7 +35,6 @@ steps:
           --delivery-pipeline=gke-cicd-pipeline \
           --region=us-central1 \
           --from-k8s-manifest=./kubernetes/app1.yaml
->>>>>>> 51e1dba (Updated files with GCP-project-name)
 
         gcloud deploy releases create "app2-release-${SHORT_SHA}" \
           --delivery-pipeline=gke-cicd-pipeline \
