@@ -7,5 +7,9 @@ metadata:
 description: prod
 requireApproval: true
 gke:
+<<<<<<< HEAD
   cluster: projects/my-gcp-project/locations/us-central1-c/clusters/cluster-2
 
+=======
+  cluster: projects/my-gcp-project/locations/us-central1-c/clusters/cluster-2
+>>>>>>> 51e1dba (Updated files with GCP-project-name)

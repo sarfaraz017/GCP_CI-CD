@@ -1,4 +1,5 @@
 steps:
+<<<<<<< HEAD
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'us-central1-docker.pkg.dev/my-gcp-project/gke-repo/quickstart-image', './app1' ]
   id: 'Build Docker Image'
@@ -36,7 +37,49 @@ steps:
     gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=gke-cicd-pipeline --region=us-central1 --from-k8s-manifest=./kubernetes/app2.yaml
 
   # gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=gke-cicd-pipeline --region=us-central1 --skaffold-file=skaffold.yaml
+=======
+  # Build app1 Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build Docker Image - app1'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/gcp-sar-project/gke-repo/quickstart-image', './app1']
 
+  # Push app1 Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push Docker Image - app1'
+    args: ['push', 'us-central1-docker.pkg.dev/gcp-sar-project/gke-repo/quickstart-image']
+
+  # Build app2 Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build Docker Image - app2'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/gcp-sar-project/gke-repo/flask-image', './app2']
+
+  # Push app2 Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push Docker Image - app2'
+    args: ['push', 'us-central1-docker.pkg.dev/gcp-sar-project/gke-repo/flask-image']
+
+  # Deploy to Google Cloud Deploy
+  - name: 'google/cloud-sdk:latest'
+    id: 'Deploy to GKE via Cloud Deploy'
+    entrypoint: 'sh'
+    args:
+      - -xe
+      - -c
+      - |
+        gcloud deploy apply --file deploy/pipeline.yaml --region=us-central1
+        gcloud deploy apply --file deploy/dev.yaml --region=us-central1
+        gcloud deploy apply --file deploy/prod.yaml --region=us-central1
+
+        gcloud deploy releases create "app1-release-${SHORT_SHA}" \
+          --delivery-pipeline=gke-cicd-pipeline \
+          --region=us-central1 \
+          --from-k8s-manifest=./kubernetes/app1.yaml
+>>>>>>> 51e1dba (Updated files with GCP-project-name)
+
+        gcloud deploy releases create "app2-release-${SHORT_SHA}" \
+          --delivery-pipeline=gke-cicd-pipeline \
+          --region=us-central1 \
+          --from-k8s-manifest=./kubernetes/app2.yaml
 
 options:
   logging: CLOUD_LOGGING_ONLY

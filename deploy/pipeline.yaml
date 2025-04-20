@@ -4,15 +4,10 @@ metadata:
   name: gke-cicd-pipeline
   labels:
     app: cicd
-description: cicd delivery pipeline
+description: Deploy app1 and app2 to GKE
 serialPipeline:
   stages:
-  - targetId: dev
-    # profiles:
-    # - dev
-  # - targetId: staging
-  #   profiles:
-  #   - staging
-  - targetId: prod
-  #   profiles:
-  #   - prod
+    - targetId: dev
+      profiles: []
+    - targetId: prod
+      profiles: []
